@@ -1,7 +1,7 @@
 import logging
 import time
 import os
-from color_formatter import ColorFormatter
+from slog.color_formatter import ColorFormatter
 
 class Logger(logging.Logger):
     def __init__(self, name: str, path:str, console_level:int=logging.WARNING, file_level:int=logging.DEBUG, file_suffix:str='') -> None:
