@@ -10,15 +10,21 @@ class Logger(logging.Logger):
         sh_formatter = ColorFormatter('%(asctime)s.%(msecs)03d [%(name)s] %(levelname)s %(message)s', '%H:%M:%S')
         fh_formatter = logging.Formatter('%(asctime)s.%(msecs)03d [%(name)s] %(levelname)s %(message)s', '%m-%d %H:%M:%S')
 
-        sh = logging.StreamHandler()
-        sh.setLevel(console_level)
-        sh.setFormatter(sh_formatter)
+        console_handler = logging.StreamHandler()
+        console_handler.setLevel(console_level)
+        console_handler.setFormatter(sh_formatter)
 
         self.file_name = str(int(round(time.time(), 0)))[-7:] + file_suffix + '.log'
 
-        fh = logging.FileHandler(f'{path}/{self.file_name}')
-        fh.setLevel(file_level)
-        fh.setFormatter(fh_formatter)
+        file_handler = logging.FileHandler(f'{path}/{self.file_name}')
+        file_handler.setLevel(file_level)
+        file_handler.setFormatter(fh_formatter)
 
-        self.addHandler(sh)
-        self.addHandler(fh)
+        self.addHandler(console_handler)
+        self.addHandler(file_handler)
+
+    def set_console_level(self, console_level:int):
+        self.handlers[0].setLevel(console_level)
+
+    def set_file_level(self, file_level:int):
+        self.handlers[1].setLevel(file_level)
