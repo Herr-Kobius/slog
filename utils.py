@@ -2,7 +2,7 @@ from slog.logger import Logger, logging
 
 logs_folder = './logs'
 
-global_logger = Logger('All', logs_folder, console_level=logging.DEBUG)
+global_logger = Logger('All', logs_folder, console_level=logging.INFO)
 print(f'Log File Time Stemp:{global_logger.file_name}')
 
 def log_function_call(func):
